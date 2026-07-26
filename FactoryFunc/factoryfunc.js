@@ -64,3 +64,100 @@ user2.login();
 // A senior asks:
 // "Which one communicates intent better?"
 // Sometimes maintainability matters more than tiny performance differences.
+
+
+
+
+function start(name, opponent){
+    // object where i can keep everything from start.
+   const gameBoard = {
+        arr: [
+            [],
+            [],
+            []
+        ],
+        player1: {name, score: 0, turn: true, symbol: "X"},
+        player2: {opponent, score: 6, turn: false, symbol: "O" },
+        totalScore: 0
+   };
+
+   
+
+   let {player1, player2} = gameBoard;  // object has been created of both players
+    console.log(player1, player2);
+  let [btnArr] = gameBoard.arr; 
+//   console.log(typeof(btnArr))
+//   const {totalScore} = gameBoard;
+  
+
+ let winner = "";
+
+
+  // total score print
+  function getTotalScore(){
+   console.log(gameBoard.totalScore);
+ };
+
+ // score count function 
+ function winScore(){
+    if(gameBoard.player1.score > gameBoard.player2.score){
+         winner += gameBoard.player1.score;
+        console.log(`Congrats ${gameBoard.player1.name} are the wineer lets eat Chicken: ${winner}`);
+        return winner += {
+            name,
+            score,
+            
+
+         } 
+    }else {
+         winner += gameBoard.player2.score;
+         console.log(`Congrats ${gameBoard.player2.opponent} are the wineer lets eat Chicken:  ${winner}`);
+         return;
+    }
+  }
+
+// access turns 
+function turn(){
+    console.log(player1.turn);
+     if(player1.turn){
+        console.log(`${name} is your turn`);
+     };
+
+     if(player2.turn){
+        console.log(`${opponent} its your turn now`);
+     }
+};
+
+
+function reset(){
+     gameBoard = {
+        arr : [
+              [],
+              [],
+              []
+             ],
+     player1 : {name, score: 0, turn: true},
+     player2 : {name, score: 0, turn: false},
+     totalScore: 0
+        };
+};
+
+function handleClick(id){
+    console.log("button id where click who click")
+};
+
+// decide to win 
+function finalScore(){
+    
+}
+
+
+ return {getTotalScore, winScore, turn, reset}
+
+}
+
+let init = start("umair", "hamza");
+init.getTotalScore();
+init.turn();
+
+init.winScore();
