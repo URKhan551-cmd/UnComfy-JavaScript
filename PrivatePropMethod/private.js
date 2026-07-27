@@ -18,4 +18,4 @@ console.log({
   discordName: josh.discordName,
   reputation: josh.getReputation()
 });
-// console.log(reputation); // Error  Refrence Error.
+//  console.log(reputation); // Error  Refrence Error.

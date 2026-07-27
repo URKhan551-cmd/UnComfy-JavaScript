@@ -1,12 +1,12 @@
 const arr = ["umair", "khan"];
 // const first = arr[0];  according to index position wise 
 // const last = arr[1];
-const [first, last] = arr;
+ const [first, last] = arr;
 // console.log(first);  // umair
 
 // now i dont have an array i have string how do we convert to array then destructure it.
 const [start, end] = "Umair khan".split(" ");  // this splitt will make "Umair" "khan" then convert internally to arr
-// console.log(start);
+// console.log(start); outpot  Umair
 
 const [pehla, , lastwala] = ["umair", "khan", "baluCity", "afghan"];
 // console.log(lastwala);   // here the middle one ommited .and last "afghan" ommited because of how we destruct.
@@ -62,6 +62,14 @@ object2.set("age", "67");
 
 // SWAP VARIABLES TRICK
 // There’s a well-known trick for swapping values of two variables using a destructuring assignment:
+
+let first = "Umair";
+let last = "rehman";
+[first, last] = [last, first]
+console.log(first);  // rehman
+
+// Here we create a temporary array of two variables and immediately destructure it in swapped order.
+// We can swap more than two variables this way.
 
 
 let game = "start";
