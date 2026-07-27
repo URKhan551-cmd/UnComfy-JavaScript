@@ -63,3 +63,56 @@ object2.set("age", "67");
 // SWAP VARIABLES TRICK
 // There’s a well-known trick for swapping values of two variables using a destructuring assignment:
 
+
+let game = "start";
+let player = "khan";
+[game, player] = [player, game];
+console.log(game) // khan
+// SWAPPP  
+// here we create a temporary array of two variables and immediately destructure it in swapped order.
+
+// We can swap more than two variables this way.
+
+
+// *** ...REST      OPERATOR
+
+let [name1, name2] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+console.log(name1) // julius
+console.log(name2) // ceaser
+// other omited.
+
+// If we’d like also to gather all that follows – we can add one more parameter that gets “the rest” using three dots "...":
+
+let [name1, name2, ...rest] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+// rest is an array of items, starting from the 3rd one
+alert(rest[0]); // Consul
+alert(rest[1]); // of the Roman Republic
+alert(rest.length); // 2
+
+
+// The value of rest is the array of the remaining array elements.
+let [name1, name2, ...titles] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+// now titles = ["Consul", "of the Roman Republic"]
+
+
+// Default values
+// If the array is shorter than the list of variables on the left, there will be no errors. Absent values are considered undefined:
+
+let [firstName, surname] = [];
+
+alert(firstName); // undefined
+alert(surname); // undefined
+If we want a “default” value to replace the missing one, we can provide it using =:
+
+let [bhara, chota] = ["khan"];
+let [bhara = "khannn", chota = "anonymous"] = ["khan"];
+console.log(bhara) // khan
+console.log(chota) // anonymous
+
+// Default values can be more complex expressions or even function calls. They are evaluated only if the value is not provided.
+
+// ***
+// For instance, here we use the prompt function for two defaults:
+let [name = prompt("name?"), surname=prompt("surname?")] = ["umair"];
+console.log(name) // umair
+console.log(surname) // prompyt appear your wish whcih one youbwana add
