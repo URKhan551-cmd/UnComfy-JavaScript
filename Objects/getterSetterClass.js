@@ -110,3 +110,22 @@ class User{
 // just methods can goes to prototype it can be access by any object. cretaed by this constructor.
 
 
+class User {
+  name = "John";
+}
+
+let user = new User();
+alert(user.name); // John
+alert(User.prototype.name); // undefined
+
+
+class User {
+  name = prompt("Name, please?", "John");
+}
+
+let user = new User();
+alert(user.name); // John
+
+
+
+
