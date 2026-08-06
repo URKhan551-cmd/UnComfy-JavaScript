@@ -43,7 +43,52 @@ let arr = []
    console.log(arr);
 
   
+function planRestock(pantry, shipment){
+   let result = [];
+        for(let item of shipment){
+       // console.log(item);
+       if(item.qty <= 0){
+        result.push({type: "discard", item: item});
+        continue;
+       };
+     const found = pantry.some(pants => pants.sku === item.sku);
+     if(found){
+      result.push({type: "restock", item: item});
+     }else {
+      result.push({type: "donate", item: item})
+     }
+     }
+    
+  console.log(result);
+  return result;      
+};
 
+
+
+function groupByZone(actions){
+  let resultObj = {};
+  
+  for(const action of actions){
+    let zone = action.item.zone;
+     if(!resultObj[zone]){
+      resultObj[zone] = [];
+     }
+
+     resultObj[zone].push(action);
+  };
+ 
+  return resultObj;
+};
+
+function clonePantry(pantry){
+  const copy = pantry.map(items => ({...items}))
+   return copy
+};
+
+const shipment = parseShipment(rawData);
+const actions = planRestock(pantry, shipment);
+const groupedObject = groupByZone(actions);
+console.log(groupedObject)
 
 
 
