@@ -97,3 +97,207 @@ export default {
 // what a darling! If you open this file in the browser and check the browser console, you should see our lovely "Hello, Odinite!" string logged.
 
 
+// Loading CSS
+// We don’t just need one new package for CSS, we need two. Gosh, what a greedy little thing… Let’s install them.
+
+npm install --save-dev style-loader css-loader
+
+// css-loader: will read any CSS files we import in a JavaScript file and store the result in a string. 
+// style-loader: then takes that string and actually adds the JavaScript code that will apply those styles to the page. 
+// Therefore, we need both.
+
+
+// webpack.config.js
+import path from "node:path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+
+export default {
+  mode: "development",
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(import.meta.dirname, "dist"),
+    clean: true,
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/template.html",
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+};
+
+// All this does is tell Webpack that if it encounters an imported file ending with .css, 
+// it should use the listed loaders to process that CSS file.
+
+// Loader order matters for CSS!
+// Notice how we put css-loader at the end of the array. We must set this order and not the reverse.
+
+// lets add some style to src/styles.css
+
+/* styles.css */
+body {
+  background-color: rebeccapurple;
+}
+
+// src/index.js
+import "./styles.css";
+import { greeting } from "./greeting.js";
+
+console.log(greeting);
+
+// Once again, bundle with Webpack using npx webpack, then open dist/index.html and enjoy the beautiful purple screen!
+
+
+// IMAGES OPTIMIZED WAYS ACORDING TO BUNDLER WEBPACK
+
+
+npm install --save-dev html-loader
+// Image files we reference in our HTML template, e.g. as the src of an <img>
+// We need to install and tell Webpack to use something called html-loader, which will detect image file paths in our HTML template and load the right image files for us.
+
+if
+  // Image files used in our CSS inside url()
+// Lucky us! css-loader already handles this for us, so there’s nothing extra to do for image paths in CSS!
+
+
+// Then, add the following object to the module.rules array within webpack.config.js:
+
+// webpack.config.js
+{
+  test: /\.html$/i,
+  use: ["html-loader"],
+}
+
+
+// Images we use in our JavaScript, where we will need to import the files
+
+// If we need to use a local image file in our JavaScript 
+// (such as when manipulating the DOM to create or edit img elements and set their src attribute), 
+// we need to import the images into our JavaScript module. Since images aren’t JavaScript, 
+
+// we need to tell Webpack that these files will be assets by adding an asset/resource rule. 
+// No need to install anything here. Just add the following object to the module.rules array within webpack.config.js:
+
+// webpack.config.js
+{
+  test: /\.(png|svg|jpg|jpeg|gif)$/i,
+  type: "asset/resource",
+}
+
+// You can always edit the regex in the test property to remove any file extensions you don’t need or add any extensions you do need.
+
+// src/index.js
+import odinImage from "./odin.png";
+
+const image = document.createElement("img");
+image.src = odinImage;
+
+document.body.appendChild(image);
+
+
+// After all that, if we added both html-loader and the image asset/resource rule, 
+// our webpack.config.js would look something like this:
+
+// webpack.config.js
+// webpack.config.js
+import path from "node:path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+
+export default {
+  mode: "development",
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(import.meta.dirname, "dist"),
+    clean: true,
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/template.html",
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.html$/i,
+        use: ["html-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+    ],
+  },
+};
+
+// ? *********
+// Webpack dev server
+
+// During this lesson, did you get a bit annoyed with having to run npx webpack to rebundle with every change? 
+// Fortunately, there are multiple solutions for this, and we will focus on what we think 
+// is the most useful option: webpack-dev-server. Install it as follows:
+npm install --save-dev webpack-dev-server
+
+// in vs code live run can see before saving changes 
+
+// webpack.config.js
+import path from "node:path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+
+export default {
+  mode: "development",
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(import.meta.dirname, "dist"),
+    clean: true,
+  },
+  devtool: "eval-source-map",
+  devServer: {
+    watchFiles: ["./src/template.html"],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/template.html",
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.html$/i,
+        use: ["html-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+    ],
+  },
+};
+
+// Firstly, we add a source map by setting eval-source-map as a devtool option. 
+// If we don’t do this, any error messages we get won’t necessarily match up to the correct files 
+// and line numbers from our development code. In the devtools “Sources” tab, 
+// we also won’t be able to find our original untouched code, making the Chrome debugger harder to use. 
+// Adding this source map will solve both of these problems for us.
+
+// Once set up, we can start up the dev server using the following command:
+npx webpack serve
+
+npm install --save-dev webpack-dev-server
