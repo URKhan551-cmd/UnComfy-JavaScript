@@ -45,3 +45,60 @@ const updateElement = id => content => document.querySelector(`#${id}`).textCont
 const checkHeaderText = updateElement("header") // header is an element id we wanna grab.
 checkHeaderText("kahn bhai");  // here we pass content into it whatever we want to textContent.
 
+// Another common use of currying is function composition
+// Alllows calling  small function in a specific order
+const addCustomer = fn => (...args) => {
+   console.log("Saving customer info...");
+   return fn(...args);
+};
+
+const processOrder = fn => (...args) => {
+   console.log(`Processing Order #${args[0]}`);
+   return fn(...args);
+}
+
+let completeOrder = (...args) => {
+   console.log(`Order #${[...args].toString()} completed`);
+}
+
+completeOrder = (processOrder(completeOrder));     // this will return func assign it to completeOrder var
+console.log(completeOrder);
+
+completeOrder = (addCustomer(completeOrder));
+completeOrder("1000");
+
+
+// same complete Order paths functions in a curry way
+function addCustomer(...args){
+   return function processOrder(...args){
+      return function completeOrder(...args){
+         // end
+      }
+   }
+}
+
+
+
+const curry = (fn) => {
+   console.log(fn.length)  // 3
+ return curried = (...args) => {
+    console.log(fn.length); // 3    3    3
+    console.log(args.length) // 1   2    3
+    if(fn.length !== args.length){
+       console.log(...args)  // 10     10 20     
+       return curried.bind(null, ...args);  // bind create a new func
+    }
+
+    return fn(...args);
+ }  
+}
+
+
+const total = (x, y, z) => x + y + z;     // here a total function gets 3 args and return addition of these
+
+const curriedTotal = curry(total);
+console.log(curriedTotal(10)(20)(30));  // 60
+
+
+
+
