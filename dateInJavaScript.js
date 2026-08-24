@@ -59,4 +59,19 @@ const option = {
                }
 console.log(date.toLocalDateString("en-US", option));   
 // ajj din    Monday, August 24, 2026
+// whenever we call toLcalDateString internally js engine forward thses arguments to the new Intl.DateFormat(locales, options)
+// new Intl.DateFormat constructor 
+new Intl.DateFormat(locals, options).format(date);
+
+// STEP 2:  local negotiation 
+// provided locale with engine supporta locale. if not supported look after the backup onees.
+
+// Step 3:  fetching ICU data from the browsers like V8 in chrome/node/spidermonkey in firefox.
+// it has database where defined rles for INTERNATIONAL COMPONENTS UNICODE
+// this database contain all defined rules about locals and many more TRANSLATION TOKENS FORMATING OF STRUCTURE
+// 
+
+// STTEP 4:  TIME ZONE ALIGNMENT 
+  // this method extract the UTC time from Date object which store internaly as a single UNIX timestamp in milisecond.
+// it shift it to  local timezone of the runtime environment befoee rendering the componenets.
 
