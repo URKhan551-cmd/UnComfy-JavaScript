@@ -75,3 +75,39 @@ new Intl.DateFormat(locals, options).format(date);
   // this method extract the UTC time from Date object which store internaly as a single UNIX timestamp in milisecond.
 // it shift it to  local timezone of the runtime environment befoee rendering the componenets.
 
+// formatDate()
+//     ↓
+// "Is this date today?"
+//     ↓ yes → "Today"
+
+//     ↓ no
+// "Is this date tomorrow?"
+//     ↓ yes → "Tomorrow"
+
+//     ↓ no
+// "Give me a nicely formatted date"
+
+// formatTime()
+//     ↓
+// "14:00:00"
+//     ↓
+// split into ["14", "00", "00"]
+//     ↓
+// 14 hours
+//     ↓
+// 14 >= 12 → PM
+//     ↓
+// 14 % 12 → 2
+//     ↓
+// "2:00 pm"
+
+
+// formatShortDate()
+//     ↓
+// "2026-08-23"
+//     ↓
+// Date object
+//     ↓
+// locale formatting
+//     ↓
+// "Aug 23"
