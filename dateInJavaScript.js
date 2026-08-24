@@ -33,7 +33,7 @@ console.log(final)
 // toLocalDateString() adapt human cultures it ensures that date looks correct around the world.
 // automatically managed.
 // toLocalDateString(locals, optional);
-// locals (string or Array) 'en-US' 'fr-FR' 'zh-CN'
+// locals (string or Array) 'en-US' 'fr-FR' 'zh-CN' "en-AE"
 // option => {an Object}
 // this object has to customize the parts of date to be displayed likee
 // weekday: 'narrow', 'short', 'long'
