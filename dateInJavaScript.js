@@ -34,11 +34,29 @@ console.log(final)
 // automatically managed.
 // toLocalDateString(locals, optional);
 // locals (string or Array) 'en-US' 'fr-FR' 'zh-CN'
+// option => {an Object}
+// this object has to customize the parts of date to be displayed likee
+// weekday: 'narrow', 'short', 'long'
+// year: 'numeric', "2-digit"
+//month: "numeric", "short", "2-digit", "narrow", "long"
+// day: "numeric", "2-digit"
+// calender : "gregory", "islamic", "hebrew", "buddhist"
 
 const ajjDin = new Date("2026, 8, 24");
 console.log("for Us english format", ajjDin.toLocaleDateString("en-US")); // for Us english format 8/24/2026
 console.log("De format ", ajjDin.toLocaleDateString("de-DE"));    // De format  24.8.2026
 console.log("Arabic islamic format", ajjDin.toLocaleDateString("ar-EG")); // Arabic islamic format ٢٤‏/٨‏/٢٠٢٦
 
+// we can pass an array of Locals ['en-US', "fr-FR"]; if the first didnot work the second will come after 
+// sometimes it will get the system default local .
 
+
+const option = {
+                weekday: 'long', 
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+               }
+console.log(date.toLocalDateString("en-US", option));   
+// ajj din    Monday, August 24, 2026
 
