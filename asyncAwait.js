@@ -8,6 +8,8 @@
 // Explain what happens when an error is thrown inside an async function.
 // Explain how you can handle errors inside an async function.
 
+// An important thing to understand is async functions are just syntactical sugar for promises.
+
 const server = {
   people: [
     {
@@ -45,4 +47,27 @@ async function getPersonsInfo(name) {
   return person;
 }
 
+//
+const yourAsyncFunction = async () => {
+  // do something asynchronously and return a promise
+  return result;
+}
+
+
+anArray.forEach(async item => {
+  // do something asynchronously for each item in 'anArray'
+  // one could also use .map here to return an array of promises to use with 'Promise.all()'
+});
+
+server.getPeople().then(async people => {
+  people.forEach(person => {
+    // do something asynchronously for each person
+  });
+});
+
+The await keyword
+// await does the following: it tells JavaScript to wait for an asynchronous action to 
+// finish before continuing the function. It’s like a ‘pause until done’ keyword. 
+// The await keyword is used to get a value from a function where you would normally use .then(). 
+// Instead of calling .then() after the asynchronous function, you would assign a variable to the result using await
 
