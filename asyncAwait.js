@@ -176,3 +176,78 @@ function doubleAfter2Seconds(x) {
     }, 2000);
   });
 }
+// now how to use this function  
+// In this code we have a function called doubleAfter2Seconds. 
+// This function will take a number as input and will resolve two seconds later with the number doubled.
+
+doubleAfter2Seconds(10).then((r) => {
+  console.log(r);
+});
+
+
+let sum =   doubleAfter2Seconds(10)
+          + doubleAfter2Seconds(20)
+          + doubleAfter2Seconds(30);
+console.log(sum);
+// undefined
+// The problem with the above code is it doesn’t actually wait for our promises to resolve before logging to the console.
+
+// One possible solution is to set up a promise chain. 
+// To do this we’ll create a new function called addPromise. 
+// Our function will take an input value, and will return a Promise. Here’s what the boilerplate code looks like:
+
+function addPromise(x){
+  return new Promise(resolve => {
+    // Code goes here...   
+    // resolve()
+  });
+};
+
+
+
+
+// In this example we should be returning x + 2*a + 2*b + 2*c. Here’s the code:
+
+function addPromise(x){
+  return new Promise(resolve => {
+    doubleAfter2Seconds(10).then((a) => {
+      doubleAfter2Seconds(20).then((b) => {
+        doubleAfter2Seconds(30).then((c) => {
+          resolve(x + a + b + c);
+        })
+      })
+    })
+  });
+}
+// Lets walk through
+// First, we create our function addPromise. This function accepts one parameter.
+// Next, we create our new Promise that we’ll be returning. Note that for the sake of simplicity, we’re not handling rejections/errors.
+// Next we invoke doubleAfter2Seconds for the first time, passing in a value of 10. Two seconds later, the return value of 20 will be returned to the a variable.
+// We invoke doubleAfter2Seconds again, this time passing in a value of 20. Two seconds later, the return value of 40 will be returned to the b variable.
+// We invoke doubleAfter2Seconds one final time, this time passing in a value of 30. Two seconds later, the return value of 60 will be returned to the c variable.
+// Finally, we resolve our Promise with the value of 10 + 20 + 40 + 60 or 130.
+
+function doubleAfter2Seconds(x) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(x * 2);
+    }, 2000);
+  });
+}
+
+function addPromise(x){
+  return new Promise(resolve => {
+    doubleAfter2Seconds(10).then((a) => {
+      doubleAfter2Seconds(20).then((b) => {
+        doubleAfter2Seconds(30).then((c) => {
+          resolve(x + a + b + c);
+      	})
+      })
+    })
+  });
+}
+
+addPromise(10).then((sum) => {
+  console.log(sum);
+});
+
