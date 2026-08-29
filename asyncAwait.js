@@ -139,3 +139,40 @@ async function getPersonsInfo(name) {
   }
 </script>
 
+<script>
+  const img = document.querySelector('img');
+
+  async function getCats() {
+    const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key=YOUR_KEY_HERE&s=cats');
+    const catData = await response.json();
+    img.src = catData.data.images.original.url;
+  }
+</script>
+
+
+// now how to handle erro throuh try catch block implement here in the same func
+<script>
+  const img = document.querySelector('img');
+
+  async function getCats() {
+    try {
+      const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key=YOUR_KEY_HERE&s=cats');
+      const catData = await response.json();
+      img.src = catData.data.images.original.url;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  getCats();    // herre we did cal our func to start
+</script>
+
+
+// hereis some examples 
+
+function doubleAfter2Seconds(x) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(x * 2);
+    }, 2000);
+  });
+}
