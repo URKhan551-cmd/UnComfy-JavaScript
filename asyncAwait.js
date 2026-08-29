@@ -71,3 +71,54 @@ The await keyword
 // The await keyword is used to get a value from a function where you would normally use .then(). 
 // Instead of calling .then() after the asynchronous function, you would assign a variable to the result using await
 
+// But there is another way: the mighty try…catch statement! If you want to handle the error directly inside the async function, 
+// you can use try...catch with async/await syntax. If JavaScript throws an error in the try block, 
+// the catch block code will run instead (this can also be used for synchronous code).
+
+asyncFunctionCall().catch(err => {
+  console.error(err)
+});
+
+async function getPersonsInfo(name) {
+  try {
+    const people = await server.getPeople();
+    const person = people.find(person => { return person.name === name });
+    return person;
+  } catch (error) {
+    // Handle the error any way you'd like
+  }
+}
+
+<script>
+  const img = document.querySelector('img');
+  fetch('https://api.giphy.com/v1/gifs/translate?api_key=YOUR_KEY_HERE&s=cats')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(response) {
+      img.src = response.data.images.original.url;
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+</script>
+
+
+// handle with help of async
+  
+<script>
+  const img = document.querySelector('img');
+
+  async function getCats() {
+    fetch('https://api.giphy.com/v1/gifs/translate?api_key=YOUR_KEY_HERE&s=cats')
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(response) {
+        img.src = response.data.images.original.url;
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  }
+</script>
