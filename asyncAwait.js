@@ -1,6 +1,13 @@
 // For example, the two code blocks below do the exact same thing. 
 // They both get information from a server, process it, and return a promise.
 
+// Explain how you declare an async function.
+// Explain what the async keyword does.
+// Explain what the await keyword does.
+// Explain what an async function returns.
+// Explain what happens when an error is thrown inside an async function.
+// Explain how you can handle errors inside an async function.
+
 const server = {
   people: [
     {
